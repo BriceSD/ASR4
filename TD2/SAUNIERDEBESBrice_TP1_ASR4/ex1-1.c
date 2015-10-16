@@ -21,7 +21,7 @@ int main(int argc, char *argv[]){
       exit(0); //On sort du switch case (pour ne pas passer par default)
     default : /* pere */
       printf ("pere : %d\n", getpid()) ;
-      wait(NULL); //On met le pere en pause pour l'empecher de se reproduire
+      printf("Processus fils vient de mourir avec le pid : %d\n", wait(NULL)); //On met le pere en pause pour l'empecher de se reproduire
   }
   }
 }
