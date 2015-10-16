@@ -1,0 +1,5 @@
+#!/bin/sh
+set `date`
+#set `horaire`
+echo 'Nous sommes le '$3' '$2' '$6", il est :" `cat horaire`
+
