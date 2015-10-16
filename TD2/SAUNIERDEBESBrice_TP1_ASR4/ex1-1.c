@@ -6,7 +6,12 @@
 
 int main(int argc, char *argv[]){
   pid_t pid;
-  for(int i=0;i<3;i++){//On créé 3 processus 1 à 1
+  int nombre_processus_a_creer;
+  if(argc >= 1)
+    nombre_processus_a_creer = atoi(argv[1]);
+  else
+    nombre_processus_a_creer = 3;
+  for(int i=0;i<nombre_processus_a_creer;i++){//On créé 3 processus 1 à 1
   pid = fork () ;
   switch (pid) {
     case -1 : /* erreur */
