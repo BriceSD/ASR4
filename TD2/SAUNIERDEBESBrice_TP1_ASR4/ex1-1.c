@@ -4,13 +4,13 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-int main (void){
+int main(int argc, char *argv[]){
   pid_t pid;
   for(int i=0;i<3;i++){//On créé 3 processus 1 à 1
   pid = fork () ;
   switch (pid) {
     case -1 : /* erreur */
-      perror ("\nerreur fork") ;
+      perror ("\nErreur fork") ;
     case 0 : /* fils */
       printf ("fils : %d, pid du père : %d\n", getpid(), getppid());
       exit(0); //On sort du switch case (pour ne pas passer par default)
