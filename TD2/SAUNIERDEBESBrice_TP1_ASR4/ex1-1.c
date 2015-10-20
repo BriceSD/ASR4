@@ -7,7 +7,7 @@
 int main(int argc, char *argv[]){
   pid_t pid;
   int nombre_processus_fils_a_creer;
-  if(argc >= 1)
+  if(argc >= 2)
     nombre_processus_fils_a_creer = atoi(argv[1]);
   else
     nombre_processus_fils_a_creer = 3;
@@ -21,7 +21,9 @@ int main(int argc, char *argv[]){
       exit(0); //On sort du switch case (pour ne pas passer par default)
     default : /* pere */
       printf ("pere : %d\n", getpid()) ;
-      printf("Processus fils vient de mourir avec le pid : %d\n", wait(NULL)); //On met le pere en pause pour l'empecher de se reproduire, et on récupère les id des processus fils lorsqu’ils meurent
+      sleep(10); // On attend 10 secondes pour observer le zombie
+      int proc_fils = wait(NULL);
+      printf("Processus fils vient de mourir avec le pid : %d\n", proc_fils); //On met le pere en pause pour l'empecher de se reproduire, et on récupère les id des processus fils lorsqu’ils meurent
   }
   }
 }
