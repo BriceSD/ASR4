@@ -9,6 +9,7 @@
 
 int main(int argc, char *argv[]){
   //Pour que les droits soient bien à 777 il faut dabords mettre umask à 000 (777-000=777)
+  char *name="test1.txt";
   int fd = open("test1.txt", O_CREAT|O_WRONLY, 0777);
   write(fd,argv[1], strlen(argv[1]));
 
