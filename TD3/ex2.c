@@ -4,26 +4,26 @@
 
 
 void f1(){
-    char *p = "aaaaaaaaaaaaaaa";
+    char *p = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     char p2= p[3];
 }
 
 void f2(){
-    char p[] = "aaaaaaaaaaaaaaa";
+    char p[] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     char p2= p[3];
 }
 
 void f3(){
-    static char *p = "aaaaaaaaaaaaaaa";
+    static char *p = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     char p2= p[3];
 }
 
 void f4(){
-    static char p[] = "aaaaaaaaaaaaaaa";
+    static char p[] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     char p2= p[3];
 }
 
-void f5(){ char *p = "aaaaaaaaaaaaaaa"; char p2= p[3]; }
+#define f5(){ char *p = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"; char p2= p[3]; }
 
 int main(int argc, char** argv){
 
