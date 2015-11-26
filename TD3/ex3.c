@@ -14,12 +14,10 @@ int main(int argc, char **argv)
      case -1 : /* erreur */
        perror ("\nErreur fork") ;
      case 0 : /* fils */
-       printf ("fils : %d, pid du père : %d\n", getpid(), getppid());
        printf ("Commande %s :\n", argv[i]);
        execlp(argv[i],argv[i], NULL);
        exit(0); //On sort du switch case (pour ne pas passer par default)
      default : /* pere */
-       printf ("pere : %d\n", getpid()) ;
        wait(NULL); //On met le pere en pause pour l'empecher de se reproduire
     }
   }
