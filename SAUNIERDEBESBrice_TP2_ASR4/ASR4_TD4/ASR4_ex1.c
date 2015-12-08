@@ -16,8 +16,6 @@ int main(int argc, char *argv[]){
   struct tms tms_start, tms_end;
 
   times(&tms_start);
-  clock_t time_start;
-  time_start = tms_start.tms_utime;
 
   //le processus en question
   int pid = getpid();
@@ -39,9 +37,7 @@ int main(int argc, char *argv[]){
 
   /*Temps CPU utilisateur consomme*/
   for(int i=0; i<100000000;i++);
-  clock_t time_end;
   times(&tms_end);
-  time_end = tms_end.tms_utime;
 
   printf("Temps CPU user: %ld ms\n", tms_end.tms_utime - tms_start.tms_utime);
 
