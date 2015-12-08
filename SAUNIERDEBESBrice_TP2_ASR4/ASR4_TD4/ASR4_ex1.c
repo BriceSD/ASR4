@@ -13,17 +13,11 @@
 
 int main(int argc, char *argv[]){
   clock_t start_t = clock();
+  struct tms tms_start, tms_end;
 
-  //clock_t times(struct tms *);
-
-  /*
-  struct tms {
-    clock_t tms_utime;
-    clock_t tms_stime;
-    clock_t tms_cutime;
-    clock_t tms_cstime;
-  };
-  */
+  times(&tms_start);
+  clock_t time_start;
+  time_start = tms_start.tms_utime;
 
   //le processus en question
   int pid = getpid();
@@ -44,16 +38,17 @@ int main(int argc, char *argv[]){
     perror("getcwd() error\n");
 
   /*Temps CPU utilisateur consomme*/
-  //A COMPLETER
+  for(int i=0; i<100000000;i++);
+  clock_t time_end;
+  times(&tms_end);
+  time_end = tms_end.tms_utime;
 
-  struct tms* time_cpu = malloc(sizeof(struct tms *));
-  clock_t time_user = times(time_cpu);
-  printf("Temps CPU user: %ld\n", time_cpu->tms_utime);
+  printf("Temps CPU user: %ld ms\n", tms_end.tms_utime - tms_start.tms_utime);
 
   /*Temps CPU noyau consomme*/
   //A COMPLETER
   clock_t end_t = clock();
-  clock_t total_t = (double)(end_t - start_t);
+  clock_t total_t = end_t - start_t;
   printf("Temps CPU noyau: %lu ms\n", total_t);
 
   printf("\n");

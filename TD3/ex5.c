@@ -8,8 +8,10 @@
 
 int main(int argc, char **argv)
 {
-  for(int i = 1; i < argc; i++){
-    pid_t pid_commande1 = fork ();
+    pid_t p1 = fork ();
+    pid_t p2 = fork ();
+    pid_t p3 = fork ();
+
     switch (pid_commande1 ) {
      case -1 : /* erreur */
        perror ("\nErreur fork") ;
@@ -20,7 +22,6 @@ int main(int argc, char **argv)
        exit(0); //On sort du switch case (pour ne pas passer par default)
      default : /* pere */
        wait(NULL); //On met le pere en pause pour l'empecher de se reproduire
-       break;
     }
   }
 return 0;
