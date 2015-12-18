@@ -5,26 +5,10 @@
 int pip[2];
 int pip2[2];
 //descripteur de pipe
-main()
-{
-  if(pipe(pip)||pipe(pip2))
-    //Ouverture d'un pipe
-  { perror("Erreur de pipe"); exit(1);}
-  printf("Dernier message avant fork\n");
-  switch(fork())
-
-    //Creation d'un processus
-  {
-    case -1 : perror("Erreur de fork"); exit(1);
-    case 0 : fils();break;
-    default :pere();
-  }
-  printf("\nFin programme");
-}
 
 //Le fils lis dans le pipe
 
-fils()
+void fils()
 {
   char buffer[15];
   char buffer2[15];
@@ -45,12 +29,11 @@ fils()
       exit(2);
     }
   }
-  return;
 }
 
 //Le pere ecrit dans le pipe
 
-pere()
+void pere()
 {
   int i;
   char buf[15];
@@ -71,6 +54,21 @@ pere()
     }
     printf("\nlu: %s", buf2);
   }
-  return;
 }
 
+int main()
+{
+  if(pipe(pip)||pipe(pip2))
+    //Ouverture d'un pipe
+  { perror("Erreur de pipe"); exit(1);}
+  printf("Dernier message avant fork\n");
+  switch(fork())
+
+    //Creation d'un processus
+  {
+    case -1 : perror("Erreur de fork"); exit(1);
+    case 0 : fils();break;
+    default :pere();
+  }
+  printf("\nFin programme");
+}
