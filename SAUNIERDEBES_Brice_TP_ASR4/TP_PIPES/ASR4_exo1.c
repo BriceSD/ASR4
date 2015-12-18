@@ -16,16 +16,17 @@ void fils()
   strcpy(buffer2,"toto    ");
   for(i=0;i<10;i++)
   {
-    if( read(pip[0],buffer,15) != 15)
-    { perror("Erreur read fils");
+    if(read(pip[0],buffer,15) != 15){
+      perror("Erreur read fils\n");
       exit(1);
     }
-    printf("\nlu: %s", buffer);
+
+    printf("Lu: %s\n", buffer);
     buffer2[5]=i+48;
     buffer2[6]=0;
     if( write(pip2[1], buffer2, 15) != 15)
     {
-      perror("Erreur write fils");
+      perror("Erreur write fils\n");
       exit(2);
     }
   }
@@ -44,31 +45,32 @@ void pere()
     buf[12]=i+48;
     buf[13]=0;
     if( write(pip[1],buf,15) != 15)
-    { perror("Erreur write pere");
+    { perror("Erreur write pere\n");
       exit(1);
     }
     if( read(pip2[0], buf2, 15) != 15)
     {
-      perror("Erreur read pere");
+      perror("Erreur read pere\n");
       exit(3);
     }
-    printf("\nlu: %s", buf2);
+    printf("Lu: %s\n", buf2);
   }
 }
 
 int main()
 {
-  if(pipe(pip)||pipe(pip2))
-    //Ouverture d'un pipe
-  { perror("Erreur de pipe"); exit(1);}
+  //Ouverture d'un pipe
+  if(pipe(pip)||pipe(pip2)){
+    perror("Erreur de pipe");
+    exit(1);
+  }
   printf("Dernier message avant fork\n");
-  switch(fork())
 
-    //Creation d'un processus
-  {
+  //Creation d'un processus
+  switch(fork()){
     case -1 : perror("Erreur de fork"); exit(1);
     case 0 : fils();break;
     default :pere();
   }
-  printf("\nFin programme");
+
 }
