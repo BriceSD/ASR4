@@ -14,6 +14,7 @@ int main(int argc, char *argv[]){
   char buffer[100];
   int readingSize = 3;
 
+  //Initialisation de la chaine de caractère
   for(int i = 0; i < 100; i++){
     buffer[i]=' ';
   }
