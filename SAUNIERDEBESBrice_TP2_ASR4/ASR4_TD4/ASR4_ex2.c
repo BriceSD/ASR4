@@ -7,27 +7,34 @@
 #include <dirent.h>
 #include <stdio.h>
 #include <time.h>
+#include <wait.h>
 
 int main(int argc, char *argv[]){
-	// le nombre de processus fils a creer
-		switch(pid=fork()){
-		
-			case -1 :
-				perror("fork");
-				exit(1);
-			case 0 :
-				exit(0);
-			default :
-				printf("je suis le père %d\net mon fils est : %d\n", getpid(), pid);
-				int proc_fils=wait(NULL);
-				//On met le pere en pause pour l'empecher de se reproduire, et on récupère les id des processus fils lorsqu’ils meurent
-				printf("Processus fils vient de mourir avec le pid : %d\n", proc_fils);
-				
-		}			
-	}
-	return 0;
+  FILE *fd; // stream du fichier créé
+  char buffer[100];
+  int readingSize = 3;
+
+  for(int i = 0; i < 100; i++){
+    buffer[i]=' ';
+  }
+
+  if((fd = fopen("fichier", "r")) == NULL)
+    perror("open");
+
+  fread(buffer, readingSize, 1, fd);
+  printf("Premiere lecture : %s\n", buffer);
+
+  //Ouverture d’un cream
+  switch(fork()){
+    case -1:
+      printf("Erreur");
+      exit(1);
+    case 0:
+      fread(buffer, readingSize, 1, fd);
+      printf("Seconde lecture : %s\n", buffer);
+    default:
+      wait(NULL);
+      exit(1);
+  }
+  return 0;
 }
-
-
-
-

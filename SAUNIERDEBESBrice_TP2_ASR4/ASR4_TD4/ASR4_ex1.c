@@ -9,8 +9,6 @@
 #include <time.h>
 #include <sys/times.h>
 
-
-
 int main(int argc, char *argv[]){
   clock_t start_t = clock();
   struct tms tms_start, tms_end;
