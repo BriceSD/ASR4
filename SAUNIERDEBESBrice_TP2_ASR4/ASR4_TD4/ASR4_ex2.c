@@ -32,7 +32,7 @@ int main(int argc, char *argv[]){
       exit(1);
     case 0:
       fread(buffer, readingSize, 1, fd);
-      printf("Seconde lecture : %s\n", buffer);
+      printf("Fils : Seconde lecture : %s\n", buffer);
     default:
       wait(NULL);
       exit(1);
